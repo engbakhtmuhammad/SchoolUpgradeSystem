@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Analysis - Government of Balochistan School Upgrade System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #059669;
+            --accent-color: #dc2626;
+            --gold-color: #d97706;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f8fafc;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        /* Government Header */
+        .gov-header {
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .gov-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .gov-emblem {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .gov-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .gov-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .main-container {
+            padding: 2rem 0;
+        }
+
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border: none;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border: none;
+        }
+
+        .card-header h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 12px;
+            padding: 0.875rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: none;
+            letter-spacing: 0.025em;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+            background: linear-gradient(135deg, #1e40af, #047857);
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            border: none;
+            border-radius: 12px;
+            padding: 0.875rem 2rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+            transform: translateY(-1px);
+        }
+        .config-section {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        .data-summary {
+            background: linear-gradient(45deg, #e3f2fd, #f3e5f5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .range-slider {
+            margin: 20px 0;
+        }
+        .range-output {
+            background-color: #e7f3ff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            color: #004085;
+        }
+        .preset-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .preset-btn {
+            padding: 8px 16px;
+            border: 1px solid #dee2e6;
+            background-color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .preset-btn:hover, .preset-btn.active {
+            background-color: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+        .analysis-preview {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container main-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="mb-0">
+                            <i class="fas fa-cogs me-2"></i>
+                            Configure Analysis Parameters
+                        </h2>
+                        <p class="mb-0 mt-2">Set the search radius and other parameters for school upgrade analysis</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Data Summary -->
+                        <div class="data-summary">
+                            <h5><i class="fas fa-database me-2"></i>Data Summary</h5>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h3 class="text-primary">{{ schools_count }}</h3>
+                                    <p class="mb-0">Total Functional Schools</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="text-success">{{ districts|length }}</h3>
+                                    <p class="mb-0">Districts Covered</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3 class="text-info">{{ filename }}</h3>
+                                    <p class="mb-0">Data Source File</p>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <strong>Districts:</strong> {{ districts|join(', ') }}
+                            </div>
+                        </div>
+
+                        <!-- Configuration Form -->
+                        <form action="/analyze" method="post" id="analyzeForm">
+                            <div class="config-section">
+                                <h5><i class="fas fa-bullseye me-2"></i>Search Radius Configuration</h5>
+                                <p class="text-muted">
+                                    Set the radius within which to search for existing schools of higher levels. 
+                                    Smaller radius = more upgrade recommendations, Larger radius = fewer recommendations.
+                                </p>
+                                
+                                <div class="range-slider">
+                                    <label for="radiusRange" class="form-label">Search Radius (kilometers)</label>
+                                    <input type="range" class="form-range" id="radiusRange" name="radius" 
+                                           min="5" max="50" step="1" value="25">
+                                    <div class="range-output" id="radiusOutput">25 km</div>
+                                </div>
+
+                                <!-- Preset Buttons -->
+                                <div class="preset-buttons">
+                                    <div class="preset-btn" data-value="7">7 km (Very Local)</div>
+                                    <div class="preset-btn" data-value="10">10 km (Local)</div>
+                                    <div class="preset-btn" data-value="15">15 km (Regional)</div>
+                                    <div class="preset-btn active" data-value="25">25 km (Standard)</div>
+                                    <div class="preset-btn" data-value="30">30 km (Wide)</div>
+                                    <div class="preset-btn" data-value="40">40 km (District)</div>
+                                </div>
+
+                                <!-- Analysis Preview -->
+                                <div class="analysis-preview">
+                                    <h6><i class="fas fa-lightbulb me-2"></i>Analysis Impact</h6>
+                                    <p id="analysisDescription" class="mb-0">
+                                        With a 25km radius, schools will be recommended for upgrade if there are no higher-level schools within 25 kilometers. This is suitable for most rural and semi-urban areas.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="config-section">
+                                <h5><i class="fas fa-filter me-2"></i>Analysis Configuration</h5>
+                                
+                                <!-- District Selection -->
+                                <div class="mb-4">
+                                    <label class="form-label">
+                                        <i class="fas fa-map-marker-alt me-2"></i>Select Districts to Analyze
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-12 mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="districts" value="all" id="allDistricts" checked>
+                                                <label class="form-check-label fw-bold" for="allDistricts">
+                                                    All Districts
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {% for district in districts %}
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input district-checkbox" type="checkbox" name="districts" value="{{ district }}" id="district_{{ loop.index }}">
+                                                <label class="form-check-label" for="district_{{ loop.index }}">
+                                                    {{ district }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="form-text">
+                                        Select specific districts or choose "All Districts" for comprehensive analysis
+                                    </div>
+                                </div>
+
+                                <!-- Gender Selection -->
+                                <div class="mb-4">
+                                    <label class="form-label">
+                                        <i class="fas fa-venus-mars me-2"></i>Select Gender Types to Analyze
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-12 mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="genders" value="all" id="allGenders" checked>
+                                                <label class="form-check-label fw-bold" for="allGenders">
+                                                    All Gender Types
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input gender-checkbox" type="checkbox" name="genders" value="Boys" id="gender_boys">
+                                                <label class="form-check-label" for="gender_boys">
+                                                    <i class="fas fa-male text-primary me-1"></i>Boys Schools
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input gender-checkbox" type="checkbox" name="genders" value="Girls" id="gender_girls">
+                                                <label class="form-check-label" for="gender_girls">
+                                                    <i class="fas fa-female text-danger me-1"></i>Girls Schools
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input gender-checkbox" type="checkbox" name="genders" value="Co-Education" id="gender_coed">
+                                                <label class="form-check-label" for="gender_coed">
+                                                    <i class="fas fa-users text-success me-1"></i>Co-Education Schools
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-text">
+                                        Select specific gender types or choose "All Gender Types" for comprehensive analysis
+                                    </div>
+                                </div>
+
+                                <!-- Functional Status Selection -->
+                                <div class="mb-4">
+                                    <label class="form-label">
+                                        <i class="fas fa-check-circle me-2"></i>School Functional Status
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="functional_status" value="functional" id="functional" checked>
+                                                <label class="form-check-label" for="functional">
+                                                    <i class="fas fa-check text-success me-1"></i>Functional Schools
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="functional_status" value="non_functional" id="non_functional">
+                                                <label class="form-check-label" for="non_functional">
+                                                    <i class="fas fa-times text-danger me-1"></i>Non-Functional Schools
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-text">
+                                        Choose which schools to include in the upgrade analysis
+                                    </div>
+                                </div>
+
+                                <!-- School Levels to Analyze -->
+                                <div class="mb-4">
+                                    <label class="form-label">
+                                        <i class="fas fa-graduation-cap me-2"></i>School Levels to Analyze for Upgrade
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-12 mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="analyze_levels" value="all" id="allLevels" checked>
+                                                <label class="form-check-label fw-bold" for="allLevels">
+                                                    All Levels
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input level-checkbox" type="checkbox" name="analyze_levels" value="Primary" id="level_primary">
+                                                <label class="form-check-label" for="level_primary">
+                                                    <i class="fas fa-circle text-primary me-1"></i>Primary → Middle
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input level-checkbox" type="checkbox" name="analyze_levels" value="Middle" id="level_middle">
+                                                <label class="form-check-label" for="level_middle">
+                                                    <i class="fas fa-circle text-success me-1"></i>Middle → High
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-sm-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input level-checkbox" type="checkbox" name="analyze_levels" value="High" id="level_high">
+                                                <label class="form-check-label" for="level_high">
+                                                    <i class="fas fa-circle text-warning me-1"></i>High → Higher Secondary
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-text">
+                                        Select which school levels to consider for upgrade recommendations
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="minEnrollment" class="form-label">Minimum Student Enrollment</label>
+                                        <input type="number" class="form-control" id="minEnrollment" 
+                                               name="min_enrollment" value="0" min="0">
+                                        <div class="form-text">Only consider schools with at least this many students</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="text-center">
+                                <a href="{{ url_for('index') }}" class="btn btn-secondary btn-lg me-3">
+                                    <i class="fas fa-arrow-left me-2"></i>Back to Upload
+                                </a>
+                                <button type="submit" class="btn btn-primary btn-lg" id="analyzeBtn">
+                                    <i class="fas fa-play me-2"></i>
+                                    <span id="analyzeBtnText">Start Analysis</span>
+                                    <span id="analyzeBtnSpinner" class="spinner-border spinner-border-sm ms-2" style="display: none;"></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const radiusRange = document.getElementById('radiusRange');
+        const radiusOutput = document.getElementById('radiusOutput');
+        const presetButtons = document.querySelectorAll('.preset-btn');
+        const analysisDescription = document.getElementById('analysisDescription');
+        const analyzeForm = document.getElementById('analyzeForm');
+
+        // Radius descriptions
+        const radiusDescriptions = {
+            5: "Very strict local analysis. Only schools within 5km will be considered. Best for dense urban areas with good transportation.",
+            7: "Strict local analysis. Suitable for urban areas where students can easily travel short distances.",
+            10: "Local area analysis. Good for suburban areas with moderate transportation options.",
+            15: "Regional analysis. Covers larger rural areas where students might travel longer distances.",
+            20: "Wide regional analysis. Suitable for rural areas with limited transportation infrastructure.",
+            25: "Standard analysis radius. Balanced approach suitable for most rural and semi-urban areas.",
+            30: "Wide area analysis. Covers large rural regions where transportation is challenging.",
+            35: "Very wide analysis. For remote areas where schools serve very large catchment areas.",
+            40: "District-level analysis. Covers major administrative boundaries.",
+            45: "Cross-district analysis. For areas where students cross district boundaries.",
+            50: "Maximum radius. For extremely remote areas with very sparse school distribution."
+        };
+
+        // Update radius display and description
+        function updateRadius(value) {
+            radiusOutput.textContent = `${value} km`;
+            
+            // Find closest description
+            let closestKey = Object.keys(radiusDescriptions).reduce((prev, curr) => {
+                return (Math.abs(curr - value) < Math.abs(prev - value) ? curr : prev);
+            });
+            
+            analysisDescription.textContent = radiusDescriptions[closestKey];
+            
+            // Update preset button states
+            presetButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.dataset.value) === parseInt(value)) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Range slider event
+        radiusRange.addEventListener('input', (e) => {
+            updateRadius(e.target.value);
+        });
+
+        // Preset button events
+        presetButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const value = btn.dataset.value;
+                radiusRange.value = value;
+                updateRadius(value);
+            });
+        });
+
+        // Form submission
+        // Handle gender checkboxes
+        const allGendersCheckbox = document.getElementById('allGenders');
+        const genderCheckboxes = document.querySelectorAll('.gender-checkbox');
+        
+        allGendersCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                genderCheckboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                    checkbox.disabled = true;
+                });
+            } else {
+                genderCheckboxes.forEach(checkbox => {
+                    checkbox.disabled = false;
+                });
+            }
+        });
+        
+        genderCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    allGendersCheckbox.checked = false;
+                }
+                
+                // If no gender is selected, check "All Genders"
+                const anyGenderSelected = Array.from(genderCheckboxes).some(cb => cb.checked);
+                if (!anyGenderSelected) {
+                    allGendersCheckbox.checked = true;
+                }
+            });
+        });
+
+        // Handle district checkboxes
+        const allDistrictsCheckbox = document.getElementById('allDistricts');
+        const districtCheckboxes = document.querySelectorAll('.district-checkbox');
+        
+        allDistrictsCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                districtCheckboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                    checkbox.disabled = true;
+                });
+            } else {
+                districtCheckboxes.forEach(checkbox => {
+                    checkbox.disabled = false;
+                });
+            }
+        });
+        
+        districtCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    allDistrictsCheckbox.checked = false;
+                }
+                
+                // If no district is selected, check "All Districts"
+                const anyDistrictSelected = Array.from(districtCheckboxes).some(cb => cb.checked);
+                if (!anyDistrictSelected) {
+                    allDistrictsCheckbox.checked = true;
+                }
+            });
+        });
+        
+        // Handle level checkboxes
+        const allLevelsCheckbox = document.getElementById('allLevels');
+        const levelCheckboxes = document.querySelectorAll('.level-checkbox');
+        
+        allLevelsCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                levelCheckboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                    checkbox.disabled = true;
+                });
+            } else {
+                levelCheckboxes.forEach(checkbox => {
+                    checkbox.disabled = false;
+                });
+            }
+        });
+        
+        levelCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    allLevelsCheckbox.checked = false;
+                }
+                
+                // If no level is selected, check "All Levels"
+                const anyLevelSelected = Array.from(levelCheckboxes).some(cb => cb.checked);
+                if (!anyLevelSelected) {
+                    allLevelsCheckbox.checked = true;
+                }
+            });
+        });
+
+        analyzeForm.addEventListener('submit', function(e) {
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            const analyzeBtnText = document.getElementById('analyzeBtnText');
+            const analyzeBtnSpinner = document.getElementById('analyzeBtnSpinner');
+            
+            analyzeBtn.disabled = true;
+            analyzeBtnText.textContent = 'Analyzing...';
+            analyzeBtnSpinner.style.display = 'inline-block';
+        });
+
+        // Initialize
+        updateRadius(radiusRange.value);
+    </script>
+</body>
+</html>

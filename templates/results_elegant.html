@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - Balochistan School Upgrade System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #0891b2;
+            --accent-color: #dc2626;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --info-color: #0284c7;
+            --dark-color: #1f2937;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+            --gradient-success: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            --gradient-info: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-3xl: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--gray-800);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="white" stop-opacity="0.08"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="80" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;700,600;0,0" dur="22s" repeatCount="indefinite"/></circle><circle cx="800" cy="300" r="60" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;-600,500;0,0" dur="18s" repeatCount="indefinite"/></circle><circle cx="400" cy="800" r="70" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;500,-300;0,0" dur="28s" repeatCount="indefinite"/></circle></svg>') center/cover;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Main Container */
+        .main-container {
+            padding: 1.5rem 0;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: 1rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Card Styles */
+        .card-elegant {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-elegant:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-2xl);
+        }
+
+        .card-header-elegant {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header-elegant::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .card-header-elegant h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header-elegant p {
+            font-size: 1rem;
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        .card-body-elegant {
+            padding: 2rem;
+        }
+
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stats-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stats-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-label {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Analysis Configuration Display */
+        .config-display {
+            background: var(--gradient-info);
+            color: white;
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .config-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .config-item:last-child {
+            border-bottom: none;
+        }
+
+        .config-label {
+            font-weight: 600;
+        }
+
+        .config-value {
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        /* Map Container */
+        .map-container {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            height: 600px;  /* Increased height for better visibility */
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .map-container.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            border-radius: 0;
+            margin: 0;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            min-height: 600px;  /* Ensure minimum height */
+        }
+
+        /* Ensure Leaflet map tiles load properly */
+        .leaflet-container {
+            height: 100% !important;
+            width: 100% !important;
+            background: #f8f9fa !important;
+        }
+
+        .leaflet-tile-container {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Improve tile loading visibility */
+        .leaflet-tile {
+            filter: brightness(1.02) contrast(1.02);
+        }
+
+        /* Table Styles */
+        .table-container {
+            max-height: 600px;
+            overflow-y: auto;
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+        }
+
+        .table-elegant {
+            margin: 0;
+            background: white;
+        }
+
+        .table-elegant thead th {
+            background: var(--gradient-secondary);
+            color: white;
+            border: none;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.875rem;
+            padding: 1rem;
+        }
+
+        .table-elegant tbody tr {
+            transition: all 0.2s ease;
+        }
+
+        .table-elegant tbody tr:hover {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(8, 145, 178, 0.05) 100%);
+        }
+
+        .table-elegant td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            font-weight: 500;
+        }
+
+        /* Upgrade Badges */
+        .upgrade-badge {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-lg);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .upgrade-primary {
+            background: var(--gradient-success);
+            color: white;
+        }
+
+        .upgrade-middle {
+            background: var(--gradient-warning);
+            color: white;
+        }
+
+        .upgrade-high {
+            background: var(--gradient-danger);
+            color: white;
+        }
+
+        .upgrade-higher-secondary {
+            background: var(--gradient-info);
+            color: white;
+        }
+
+        /* Breakdown Section */
+        .breakdown-section {
+            background: linear-gradient(135deg, var(--gray-50) 0%, rgba(248, 250, 252, 0.8) 100%);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .breakdown-item {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+        }
+
+        .breakdown-item:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .breakdown-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .breakdown-label {
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+
+        .breakdown-value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        /* Buttons */
+        .btn-elegant {
+            font-weight: 600;
+            border-radius: var(--radius-xl);
+            padding: 0.75rem 2rem;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-elegant::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-elegant:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary-elegant {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .btn-primary-elegant:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        .btn-success-elegant {
+            background: var(--gradient-success);
+            color: white;
+        }
+
+        .btn-success-elegant:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        .btn-secondary-elegant {
+            background: var(--gray-600);
+            color: white;
+        }
+
+        .btn-secondary-elegant:hover {
+            background: var(--gray-700);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        .btn-info-elegant {
+            background: var(--gradient-info);
+            color: white;
+        }
+
+        .btn-info-elegant:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            position: sticky;
+            bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-2xl);
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Loading States */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+        }
+
+        .loading-content {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-2xl);
+            text-align: center;
+            box-shadow: var(--shadow-2xl);
+            max-width: 400px;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--gray-200);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Map Controls */
+        .map-controls {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .map-control-btn {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: var(--radius-lg);
+            padding: 0.75rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            color: var(--gray-700);
+        }
+
+        .map-control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: var(--primary-color);
+        }
+        
+        /* Custom Map Icon Styles */
+        .custom-school-icon {
+            background: transparent !important;
+            border: none !important;
+        }
+        
+        .custom-upgrade-icon {
+            background: transparent !important;
+            border: none !important;
+        }
+        
+        .custom-upgrade-icon .fas {
+            animation: upgradeIconPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes upgradeIconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Map Legend Enhancement */
+        .leaflet-control-layers {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem 0;
+            }
+            
+            .card-body-elegant {
+                padding: 1.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+            
+            .stats-card {
+                padding: 1.5rem;
+            }
+            
+            .stats-number {
+                font-size: 2rem;
+            }
+            
+            .map-container {
+                height: 400px;
+            }
+            
+            .action-buttons {
+                position: relative;
+                bottom: auto;
+            }
+            
+            .btn-elegant {
+                padding: 0.75rem 1.5rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body::before { display: none; }
+            .action-buttons { display: none; }
+            .map-controls { display: none; }
+            .card-elegant { box-shadow: none; border: 1px solid #ccc; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Leaflet Customizations */
+        .leaflet-popup-content-wrapper {
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .leaflet-popup-tip {
+            box-shadow: var(--shadow-md);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container-fluid main-container">
+        <!-- Navigation -->
+        <div class="nav-bar" data-aos="fade-down">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-chart-line me-3 text-primary" style="font-size: 1.5rem;"></i>
+                    <h4 class="mb-0 fw-bold">Analysis Results</h4>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="/configure" class="btn btn-secondary-elegant btn-elegant btn-sm">
+                        <i class="fas fa-cog me-2"></i>Reconfigure
+                    </a>
+                    <a href="/" class="btn btn-info-elegant btn-elegant btn-sm">
+                        <i class="fas fa-home me-2"></i>Home
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Card -->
+        <div class="card-elegant" data-aos="fade-up">
+            <div class="card-header-elegant">
+                <h2><i class="fas fa-analytics me-3"></i>School Upgrade Analysis Results</h2>
+                <p>Comprehensive analysis completed with {{ stats.radius_used }}km search radius</p>
+            </div>
+        </div>
+
+        <!-- Analysis Configuration Display -->
+        <div class="config-display" data-aos="fade-up" data-aos-delay="200">
+            <h6 class="mb-3"><i class="fas fa-info-circle me-2"></i>Analysis Configuration</h6>
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="config-item">
+                        <span class="config-label">Districts:</span>
+                        <span class="config-value">
+                            {% if stats.districts_analyzed == "All" %}
+                                All Districts
+                            {% else %}
+                                {{ stats.districts_analyzed | length }} Selected
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="config-item">
+                        <span class="config-label">Gender Types:</span>
+                        <span class="config-value">
+                            {% if stats.genders_analyzed == "All" %}
+                                All Types
+                            {% else %}
+                                {{ stats.genders_analyzed | length }} Selected
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="config-item">
+                        <span class="config-label">Status:</span>
+                        <span class="config-value">{{ stats.functional_status }}</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="config-item">
+                        <span class="config-label">Radius:</span>
+                        <span class="config-value">{{ stats.radius_used }} km</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Grid -->
+        <div class="stats-grid" data-aos="fade-up" data-aos-delay="400">
+            <div class="stats-card">
+                <div class="stats-number">{{ stats.total_schools }}</div>
+                <div class="stats-label">Total Schools</div>
+            </div>
+            <div class="stats-card">
+                <div class="stats-number">{{ stats.upgrade_candidates }}</div>
+                <div class="stats-label">Upgrade Candidates</div>
+            </div>
+            <div class="stats-card">
+                <div class="stats-number">{{ "%.1f"|format(stats.upgrade_percentage) }}%</div>
+                <div class="stats-label">Upgrade Rate</div>
+            </div>
+            <div class="stats-card">
+                <div class="stats-number">{{ stats.radius_used }}</div>
+                <div class="stats-label">Search Radius (km)</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Map Column -->
+            <div class="col-lg-8">
+                <!-- Map Container -->
+                <div class="card-elegant" data-aos="fade-right" data-aos-delay="600">
+                    <div class="card-body-elegant p-0">
+                        <div class="map-container">
+                            <div class="map-controls">
+                                <button class="map-control-btn" onclick="toggleLayer('schools')" title="Toggle Schools">
+                                    <i class="fas fa-school"></i>
+                                </button>
+                                <button class="map-control-btn" onclick="toggleLayer('upgrades')" title="Toggle Upgrades">
+                                    <i class="fas fa-level-up-alt"></i>
+                                </button>
+                                <button class="map-control-btn" onclick="resetMapView()" title="Reset View">
+                                    <i class="fas fa-home"></i>
+                                </button>
+                                <button class="map-control-btn" onclick="exportMap()" title="Export Map">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                            {% if map_html %}
+                                <!-- Use Folium-generated map -->
+                                {{ map_html|safe }}
+                            {% else %}
+                                <!-- Use custom JavaScript map -->
+                                <div id="map"></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Results Table -->
+                <div class="card-elegant" data-aos="fade-right" data-aos-delay="800">
+                    <div class="card-body-elegant">
+                        <h5 class="mb-3"><i class="fas fa-table me-2"></i>Detailed Upgrade Recommendations</h5>
+                        <div class="table-container">
+                            <table class="table table-elegant">
+                                <thead>
+                                    <tr>
+                                        <th>School Name</th>
+                                        <th>District</th>
+                                        <th>Current Level</th>
+                                        <th>Recommended Upgrade</th>
+                                        <th>Gender Type</th>
+                                        <th>Priority</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for school in recommendations %}
+                                    <tr>
+                                        <td>
+                                            <strong>{{ school.school_name }}</strong>
+                                            {% if school.get('village') %}
+                                            <div class="text-muted small">{{ school.village }}</div>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ school.district }}</td>
+                                        <td>
+                                            <span class="badge bg-secondary">{{ school.current_level }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="upgrade-badge upgrade-{{ school.get('recommended_upgrade', '').lower().replace(' ', '-').replace('_', '-') }}">
+                                                {{ school.get('recommended_upgrade', 'N/A') }}
+                                            </span>
+                                        </td>
+                                        <td>{{ school.gender }}</td>
+                                        <td>
+                                            {% if loop.index <= 10 %}
+                                                <span class="badge bg-danger">High</span>
+                                            {% elif loop.index <= 50 %}
+                                                <span class="badge bg-warning">Medium</span>
+                                            {% else %}
+                                                <span class="badge bg-info">Standard</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Upgrade Breakdown -->
+                <div class="card-elegant" data-aos="fade-left" data-aos-delay="600">
+                    <div class="card-body-elegant">
+                        <h5 class="mb-3"><i class="fas fa-chart-pie me-2"></i>Upgrade Breakdown</h5>
+                        <div class="breakdown-section">
+                            {% for upgrade_type, count in stats.upgrade_breakdown.items() %}
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">{{ upgrade_type }}</span>
+                                <span class="breakdown-value">{{ count }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- District Summary -->
+                <div class="card-elegant" data-aos="fade-left" data-aos-delay="800">
+                    <div class="card-body-elegant">
+                        <h5 class="mb-3"><i class="fas fa-map me-2"></i>District Summary</h5>
+                        <div class="breakdown-section">
+                            {% for district, count in stats.district_breakdown.items() %}
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">{{ district }}</span>
+                                <span class="breakdown-value">{{ count }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card-elegant" data-aos="fade-left" data-aos-delay="1000">
+                    <div class="card-body-elegant">
+                        <h5 class="mb-3"><i class="fas fa-bolt me-2"></i>Quick Actions</h5>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success-elegant btn-elegant" onclick="downloadCSV()">
+                                <i class="fas fa-file-csv me-2"></i>Download CSV Report
+                            </button>
+                            <button class="btn btn-info-elegant btn-elegant" onclick="generatePDF()">
+                                <i class="fas fa-file-pdf me-2"></i>Generate PDF Report
+                            </button>
+                            <button class="btn btn-primary-elegant btn-elegant" onclick="shareResults()">
+                                <i class="fas fa-share-alt me-2"></i>Share Results
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons" data-aos="fade-up" data-aos-delay="1200">
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="/download/{{ analysis_id }}" class="btn btn-success-elegant btn-elegant">
+                    <i class="fas fa-download me-2"></i>Export CSV
+                </a>
+                <a href="#" onclick="toggleFullMapView(this); return false;" class="btn btn-info-elegant btn-elegant">
+                    <i class="fas fa-map-marked-alt me-2"></i>Full Map View
+                </a>
+                <a href="/configure" class="btn btn-primary-elegant btn-elegant">
+                    <i class="fas fa-cog me-2"></i>New Analysis
+                </a>
+                <a href="/" class="btn btn-secondary-elegant btn-elegant">
+                    <i class="fas fa-upload me-2"></i>Upload New Data
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h5 class="mb-2">Processing Request</h5>
+            <p class="text-muted mb-0">Please wait...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+        });
+
+        // Initialize map
+        let map;
+        let schoolsLayer;
+        let upgradesLayer;
+        let layerControl;
+
+        // Map initialization
+        function initializeMap() {
+            // Initialize map with temporary center
+            map = L.map('map').setView([29.5, 66.0], 7);
+
+            // Add tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors',
+                maxZoom: 18
+            }).addTo(map);
+
+            // Schools data from backend
+            const schools = JSON.parse('{{ schools_json | safe | tojson }}' || '[]');
+            const recommendations = JSON.parse('{{ recommendations_json | safe | tojson }}' || '[]');
+
+            console.log('Schools data:', schools.length, 'schools');
+            console.log('Recommendations data:', recommendations.length, 'recommendations');
+
+            // Create school markers
+            schoolsLayer = L.layerGroup();
+            upgradesLayer = L.layerGroup();
+
+            // Add school markers with level-based colors
+            schools.forEach(school => {
+                const lat = parseFloat(school.latitude);
+                const lng = parseFloat(school.longitude);
+                
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    // Determine school level color
+                    let schoolColor = '#2563eb'; // Default blue
+                    const level = (school.school_level || '').toLowerCase();
+                    
+                    if (level.includes('primary')) {
+                        schoolColor = '#2563eb'; // Blue for Primary
+                    } else if (level.includes('middle')) {
+                        schoolColor = '#059669'; // Green for Middle
+                    } else if (level.includes('high') && !level.includes('higher')) {
+                        schoolColor = '#d97706'; // Orange for High
+                    } else if (level.includes('higher') || level.includes('secondary')) {
+                        schoolColor = '#dc2626'; // Red for Higher Secondary
+                    }
+
+                    // Create custom school icon
+                    const schoolIcon = L.divIcon({
+                        html: `<i class="fas fa-school" style="color: ${schoolColor}; font-size: 16px; text-shadow: 1px 1px 2px rgba(255,255,255,0.8);"></i>`,
+                        iconSize: [20, 20],
+                        iconAnchor: [10, 10],
+                        popupAnchor: [0, -10],
+                        className: 'custom-school-icon'
+                    });
+
+                    const schoolMarker = L.marker([lat, lng], { icon: schoolIcon });
+
+                    schoolMarker.bindPopup(`
+                        <div class="p-2">
+                            <h6 class="mb-2 text-primary">🏫 ${school.school_name}</h6>
+                            <p class="mb-1"><strong>District:</strong> ${school.district}</p>
+                            <p class="mb-1"><strong>Level:</strong> ${school.school_level}</p>
+                            <p class="mb-1"><strong>Gender:</strong> ${school.school_gender}</p>
+                            <p class="mb-0"><strong>Status:</strong> ${school.functional_status}</p>
+                        </div>
+                    `);
+
+                    schoolsLayer.addLayer(schoolMarker);
+                }
+            });
+
+            // Add upgrade recommendation markers with distinctive icons
+            recommendations.forEach(rec => {
+                const lat = parseFloat(rec.latitude);
+                const lng = parseFloat(rec.longitude);
+                
+                if (!isNaN(lat) && !isNaN(lng)) {
+                    // Determine upgrade color based on current level
+                    let upgradeColor = '#059669'; // Default green
+                    const currentLevel = (rec.school_level || rec.current_level || '').toLowerCase();
+                    
+                    if (currentLevel.includes('primary')) {
+                        upgradeColor = '#2563eb'; // Blue for Primary → Middle
+                    } else if (currentLevel.includes('middle')) {
+                        upgradeColor = '#059669'; // Green for Middle → High
+                    } else if (currentLevel.includes('high') && !currentLevel.includes('higher')) {
+                        upgradeColor = '#d97706'; // Orange for High → Higher Secondary
+                    }
+
+                    // Create custom upgrade icon with arrow-up (green background like screenshot)
+                    const upgradeIcon = L.divIcon({
+                        html: `<div style="background: #059669; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">
+                                <i class="fas fa-arrow-up" style="color: white; font-size: 12px;"></i>
+                               </div>`,
+                        iconSize: [24, 24],
+                        iconAnchor: [12, 12],
+                        popupAnchor: [0, -12],
+                        className: 'custom-upgrade-icon'
+                    });
+
+                    const upgradeMarker = L.marker([lat, lng], { icon: upgradeIcon });
+
+                    upgradeMarker.bindPopup(`
+                        <div class="p-2">
+                            <h6 class="mb-2 text-success">🔼 UPGRADE RECOMMENDED</h6>
+                            <h6 class="mb-2" style="color: ${upgradeColor};">${rec.school_name || 'N/A'}</h6>
+                            <hr class="my-2">
+                            <p class="mb-1"><strong>Current Level:</strong> ${rec.school_level || rec.current_level || 'N/A'}</p>
+                            <p class="mb-1"><strong>Recommended:</strong> ${rec.recommended_upgrade || 'N/A'}</p>
+                            <p class="mb-1"><strong>District:</strong> ${rec.district || 'N/A'}</p>
+                            <p class="mb-0"><strong>Priority:</strong> <span class="badge bg-success">High</span></p>
+                        </div>
+                    `);
+
+                    upgradesLayer.addLayer(upgradeMarker);
+                }
+            });
+
+            // Add layers to map
+            schoolsLayer.addTo(map);
+            upgradesLayer.addTo(map);
+
+            // Fit map to show all markers with proper bounds
+            const allMarkers = L.featureGroup([schoolsLayer, upgradesLayer]);
+            if (allMarkers.getLayers().length > 0) {
+                map.fitBounds(allMarkers.getBounds(), { 
+                    padding: [50, 50],
+                    maxZoom: 12  // Don't zoom in too much
+                });
+            } else {
+                // If no markers, center on Balochistan
+                map.setView([30.25, 67.0], 8);
+            }
+            
+            // Add legend control
+            const legend = L.control({position: 'bottomleft'});
+            legend.onAdd = function (map) {
+                const div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = `
+                    <div style="background: white; padding: 10px; border-radius: 5px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); font-size: 12px;">
+                        <h6 style="margin-bottom: 8px; font-weight: bold;">School Levels & Upgrades</h6>
+                        <div style="margin-bottom: 4px;"><i class="fas fa-circle" style="color: #2563eb; margin-right: 5px;"></i> Primary Schools</div>
+                        <div style="margin-bottom: 4px;"><i class="fas fa-circle" style="color: #059669; margin-right: 5px;"></i> Middle Schools</div>
+                        <div style="margin-bottom: 4px;"><i class="fas fa-circle" style="color: #d97706; margin-right: 5px;"></i> High Schools</div>
+                        <div style="margin-bottom: 4px;"><i class="fas fa-circle" style="color: #dc2626; margin-right: 5px;"></i> Higher Secondary</div>
+                        <div style="margin-bottom: 4px;"><i class="fas fa-circle" style="color: #6b46c1; margin-right: 5px;"></i> Higher Secondary</div>
+                        <hr style="margin: 8px 0;">
+                        <div><div style="display: inline-block; background: #059669; border-radius: 50%; width: 16px; height: 16px; margin-right: 5px; position: relative; top: 2px;"><i class="fas fa-arrow-up" style="color: white; font-size: 8px; position: absolute; top: 2px; left: 4px;"></i></div> <strong>Upgrade Recommended</strong></div>
+                    </div>
+                `;
+                return div;
+            };
+            legend.addTo(map);
+        }
+
+        // Map control functions
+        function toggleLayer(layerType) {
+            // Check if we have custom map or Folium map
+            if (typeof map !== 'undefined' && map.hasLayer) {
+                // Custom Leaflet map
+                if (layerType === 'schools') {
+                    if (map.hasLayer(schoolsLayer)) {
+                        map.removeLayer(schoolsLayer);
+                    } else {
+                        map.addLayer(schoolsLayer);
+                    }
+                } else if (layerType === 'upgrades') {
+                    if (map.hasLayer(upgradesLayer)) {
+                        map.removeLayer(upgradesLayer);
+                    } else {
+                        map.addLayer(upgradesLayer);
+                    }
+                }
+            } else {
+                // Folium map - show info message
+                alert('Layer controls are available in the map menu (top-right corner of the map)');
+            }
+        }
+
+        function resetMapView() {
+            if (typeof map !== 'undefined' && map.setView) {
+                // Custom Leaflet map
+                const allMarkers = L.featureGroup([schoolsLayer, upgradesLayer]);
+                if (allMarkers.getLayers().length > 0) {
+                    map.fitBounds(allMarkers.getBounds(), { padding: [20, 20] });
+                }
+            } else {
+                // Folium map - refresh the page or show message
+                alert('Use the zoom controls on the map to adjust the view');
+            }
+        }
+
+        function exportMap() {
+            // Simple screenshot functionality (would need additional library for full implementation)
+            window.print();
+        }
+
+        // Action functions
+        function downloadCSV() {
+            showLoading();
+            window.location.href = '/download/{{ analysis_id }}';
+            setTimeout(() => hideLoading(), 1000); // Hide loading after delay
+        }
+
+        function generatePDF() {
+            showLoading();
+            // Implement PDF generation
+            setTimeout(() => {
+                alert('PDF generation feature coming soon!');
+                hideLoading();
+            }, 1000);
+        }
+
+        function shareResults() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'School Upgrade Analysis Results',
+                    text: 'Check out these school upgrade recommendations for Balochistan',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback - copy to clipboard
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Link copied to clipboard!');
+                });
+            }
+        }
+
+        function toggleFullMapView(button) {
+            const mapContainer = document.querySelector('.map-container');
+            if (mapContainer.classList.contains('fullscreen')) {
+                mapContainer.classList.remove('fullscreen');
+                document.body.style.overflow = 'auto';
+                
+                // Update button text
+                if (button) {
+                    button.innerHTML = '<i class="fas fa-map-marked-alt me-2"></i>Full Map View';
+                }
+            } else {
+                mapContainer.classList.add('fullscreen');
+                document.body.style.overflow = 'hidden';
+                
+                // Update button text
+                if (button) {
+                    button.innerHTML = '<i class="fas fa-compress me-2"></i>Exit Full View';
+                }
+                
+                // Trigger map resize if using custom map
+                if (typeof map !== 'undefined' && map.invalidateSize) {
+                    setTimeout(() => map.invalidateSize(), 100);
+                }
+            }
+        }
+
+        function exportMap() {
+            // Use browser's print function for map export
+            window.print();
+        }
+
+        // Loading functions
+        function showLoading() {
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').style.display = 'none';
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, checking for map initialization...');
+            
+            // Check if we have Folium map or need to initialize custom map
+            const mapDiv = document.getElementById('map');
+            const hasMap = mapDiv && mapDiv.innerHTML.trim() === '';
+            
+            console.log('Map div exists:', !!mapDiv);
+            console.log('Map div empty (needs initialization):', hasMap);
+            
+            if (hasMap) {
+                console.log('Initializing custom JavaScript map...');
+                initializeMap();
+            } else {
+                console.log('Using existing Folium map or map div not found');
+            }
+            
+            // Add smooth scrolling to tables
+            const tableContainer = document.querySelector('.table-container');
+            if (tableContainer) {
+                tableContainer.addEventListener('scroll', function() {
+                    const scrolled = this.scrollTop;
+                    const rate = scrolled * -0.5;
+                    this.style.transform = `translate3d(0, ${rate}px, 0)`;
+                });
+            }
+        });
+
+        // Print optimization
+        window.addEventListener('beforeprint', function() {
+            // Optimize for printing
+            document.querySelectorAll('.action-buttons').forEach(el => {
+                el.style.display = 'none';
+            });
+        });
+
+        window.addEventListener('afterprint', function() {
+            // Restore after printing
+            document.querySelectorAll('.action-buttons').forEach(el => {
+                el.style.display = '';
+            });
+        });
+    </script>
+</body>
+</html>

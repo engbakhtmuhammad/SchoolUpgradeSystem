@@ -1,0 +1,16 @@
+BemisCode,SchoolName,District,Tehsil,SubTehsil,UC,VillageName,Gender,SchoolLevel,FunctionalStatus,ReasonOfNonFunctional,Building,BuildingStructure,BuildingCondition,SpaceForNewRooms,BoundaryWall,BoundaryWallStructure,BoundaryWallCondition,ElectricityInSchool,TotalStudentProfileEntered,Source,_xCord,_yCord
+1001,GBPS SAMPLE VILLAGE 1,QUETTA,QUETTA,CENTRAL,UC-1,Sample Village 1,Boys,Primary,Functional,,Government,Concrete,Good,Yes,Complete,Concrete,Good,Available,125,EMIS,67.0101,30.1801
+1002,GBMS SAMPLE TOWN,QUETTA,QUETTA,CENTRAL,UC-1,Sample Town,Boys,Middle,Functional,,Government,Concrete,Average,No,Complete,Concrete,Good,Available,350,EMIS,67.0201,30.1901
+1003,GBHS SAMPLE CITY,QUETTA,QUETTA,CENTRAL,UC-1,Sample City,Boys,High,Functional,,Government,Concrete,Good,Yes,Complete,Concrete,Good,Available,580,EMIS,67.0301,30.2001
+1004,GGPS SAMPLE GIRLS SCHOOL,QUETTA,QUETTA,CENTRAL,UC-2,Sample Village 2,Girls,Primary,Functional,,Government,Concrete,Good,Yes,Complete,Concrete,Good,Available,95,EMIS,67.0401,30.2101
+1005,GBPS REMOTE VILLAGE 1,PISHIN,PISHIN,NORTH,UC-3,Remote Village 1,Boys,Primary,Functional,,Government,Mud,Poor,No,Partial,Mud,Poor,Not Available,45,EMIS,66.9801,30.5501
+1006,GBPS REMOTE VILLAGE 2,PISHIN,PISHIN,NORTH,UC-3,Remote Village 2,Boys,Primary,Functional,,Government,Mud,Average,Yes,Complete,Mud,Average,Not Available,68,EMIS,66.9901,30.5601
+1007,GBMS PISHIN CENTER,PISHIN,PISHIN,CENTRAL,UC-4,Pishin Center,Boys,Middle,Functional,,Government,Concrete,Good,No,Complete,Concrete,Good,Available,420,EMIS,67.0001,30.5701
+1008,GGPS MOUNTAIN VILLAGE,PISHIN,PISHIN,NORTH,UC-5,Mountain Village,Girls,Primary,Functional,,Government,Stone,Average,Yes,Partial,Stone,Average,Available,38,EMIS,66.9701,30.5801
+1009,GBPS BORDER AREA 1,PISHIN,PISHIN,WEST,UC-6,Border Area 1,Boys,Primary,Functional,,Government,Mud,Poor,No,None,None,Poor,Not Available,28,EMIS,66.9501,30.5401
+1010,GBPS BORDER AREA 2,PISHIN,PISHIN,WEST,UC-6,Border Area 2,Boys,Primary,Functional,,Government,Mud,Poor,Yes,Partial,Mud,Poor,Not Available,32,EMIS,66.9601,30.5301
+1011,GGMS CENTRAL GIRLS,QUETTA,QUETTA,CENTRAL,UC-2,Central Area,Girls,Middle,Functional,,Government,Concrete,Good,Yes,Complete,Concrete,Good,Available,285,EMIS,67.0151,30.1951
+1012,GBPS VALLEY SCHOOL,PISHIN,PISHIN,SOUTH,UC-7,Valley Area,Boys,Primary,Functional,,Government,Stone,Good,Yes,Complete,Stone,Good,Available,78,EMIS,67.0101,30.5201
+1013,GBPS HILLSIDE VILLAGE,PISHIN,PISHIN,EAST,UC-8,Hillside Village,Boys,Primary,Functional,,Government,Concrete,Average,No,Partial,Concrete,Average,Available,52,EMIS,67.0301,30.5401
+1014,GGPS EASTERN SETTLEMENT,QUETTA,QUETTA,EAST,UC-9,Eastern Settlement,Girls,Primary,Functional,,Government,Concrete,Good,Yes,Complete,Concrete,Good,Available,110,EMIS,67.0501,30.1801
+1015,GBPS WESTERN OUTPOST,PISHIN,PISHIN,WEST,UC-10,Western Outpost,Boys,Primary,Functional,,Government,Mud,Poor,No,None,None,Poor,Not Available,18,EMIS,66.9301,30.5201

@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configure Analysis - Balochistan School Upgrade System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #0891b2;
+            --accent-color: #dc2626;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --info-color: #0284c7;
+            --dark-color: #1f2937;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+            --gradient-success: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            --gradient-info: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+            --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-3xl: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--gray-800);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><circle cx="150" cy="150" r="60" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;800,800;0,0" dur="25s" repeatCount="indefinite"/></circle><circle cx="850" cy="250" r="40" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;-700,600;0,0" dur="20s" repeatCount="indefinite"/></circle><circle cx="300" cy="750" r="50" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;600,-400;0,0" dur="30s" repeatCount="indefinite"/></circle></svg>') center/cover;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Main Container */
+        .main-container {
+            padding: 2rem 0;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-2xl);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Card Styles */
+        .card-elegant {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-3xl);
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card-elegant:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-header-elegant {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header-elegant::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: rotate 8s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .card-header-elegant h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header-elegant p {
+            font-size: 1.125rem;
+            margin: 0.75rem 0 0 0;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        .card-body-elegant {
+            padding: 2.5rem;
+        }
+
+        /* Data Summary Section */
+        .data-summary {
+            background: var(--gradient-info);
+            color: white;
+            border-radius: var(--radius-2xl);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+        }
+
+        .data-summary h5 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .summary-item {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        .summary-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary-label {
+            font-weight: 600;
+        }
+
+        .summary-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Configuration Sections */
+        .config-section {
+            background: linear-gradient(135deg, var(--gray-50) 0%, rgba(248, 250, 252, 0.8) 100%);
+            border-radius: var(--radius-2xl);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .config-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-secondary);
+        }
+
+        .config-section h6 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .config-section h6 i {
+            margin-right: 0.75rem;
+            color: var(--primary-color);
+        }
+
+        /* Form Controls */
+        .form-control-elegant {
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius-lg);
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-control-elegant:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+            outline: none;
+        }
+
+        .form-label-elegant {
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label-elegant i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Checkbox Groups */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-item {
+            background: white;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .checkbox-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .checkbox-item.selected {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-item .checkmark {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 20px;
+            height: 20px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item input:checked ~ .checkmark {
+            background: var(--primary-color);
+        }
+
+        .checkbox-item .checkmark::after {
+            content: '';
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 3px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-item input:checked ~ .checkmark::after {
+            display: block;
+        }
+
+        /* Range Slider */
+        .range-container {
+            margin: 2rem 0;
+        }
+
+        .range-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--gray-300);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .range-slider::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .range-output {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Preset Buttons */
+        .preset-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .preset-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--gray-300);
+            background: white;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .preset-btn:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .preset-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Buttons */
+        .btn-elegant {
+            font-weight: 600;
+            border-radius: var(--radius-xl);
+            padding: 1rem 2.5rem;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-elegant::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-elegant:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary-elegant {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .btn-primary-elegant:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        .btn-secondary-elegant {
+            background: var(--gray-600);
+            color: white;
+        }
+
+        .btn-secondary-elegant:hover {
+            background: var(--gray-700);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        .btn-success-elegant {
+            background: var(--gradient-success);
+            color: white;
+        }
+
+        .btn-success-elegant:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        /* Analysis Preview */
+        .analysis-preview {
+            background: var(--gradient-warning);
+            color: white;
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .analysis-preview h6 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .preview-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .preview-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            position: sticky;
+            bottom: 2rem;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-2xl);
+            margin-top: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        /* Loading States */
+        .loading-spinner {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gray-200);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem 0;
+            }
+            
+            .card-body-elegant {
+                padding: 1.5rem;
+            }
+            
+            .config-section {
+                padding: 1.5rem;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .preset-buttons {
+                justify-content: center;
+            }
+            
+            .action-buttons {
+                position: relative;
+                bottom: auto;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Container -->
+    <div class="container main-container">
+        <!-- Navigation -->
+        <div class="nav-bar" data-aos="fade-down">
+            <div class="d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-cogs me-3 text-primary" style="font-size: 1.5rem;"></i>
+                    <h4 class="mb-0 fw-bold">Analysis Configuration</h4>
+                </div>
+                <a href="/" class="btn btn-secondary-elegant btn-elegant btn-sm">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Upload
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Main Configuration Panel -->
+            <div class="col-lg-8">
+                <!-- Header Card -->
+                <div class="card-elegant" data-aos="fade-up">
+                    <div class="card-header-elegant">
+                        <h2><i class="fas fa-sliders-h me-3"></i>Configure Analysis Parameters</h2>
+                        <p>Set filters and parameters to customize your school upgrade analysis</p>
+                    </div>
+                    <div class="card-body-elegant">
+                        <form action="/analyze" method="post" id="configForm">
+                            <!-- District Filter -->
+                            <div class="config-section" data-aos="fade-up" data-aos-delay="200">
+                                <h6><i class="fas fa-map-marker-alt"></i>District Selection</h6>
+                                <label class="form-label-elegant">
+                                    <i class="fas fa-list"></i>Select Districts to Analyze
+                                </label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="all_districts" name="districts" value="all" checked>
+                                        <span class="checkmark"></span>
+                                        <div>
+                                            <strong>All Districts</strong>
+                                            <div class="text-muted small">Include all available districts</div>
+                                        </div>
+                                    </div>
+                                    {% for district in districts %}
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="districts" value="{{ district }}" class="district-checkbox">
+                                        <span class="checkmark"></span>
+                                        <div>
+                                            <strong>{{ district }}</strong>
+                                            <div class="text-muted small">{{ district_counts.get(district, 0) }} schools</div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Gender Filter -->
+                            <div class="config-section" data-aos="fade-up" data-aos-delay="400">
+                                <h6><i class="fas fa-users"></i>Gender Type Selection</h6>
+                                <label class="form-label-elegant">
+                                    <i class="fas fa-filter"></i>Select School Gender Types
+                                </label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="all_genders" name="genders" value="all" checked>
+                                        <span class="checkmark"></span>
+                                        <div>
+                                            <strong>All Gender Types</strong>
+                                            <div class="text-muted small">Include all gender categories</div>
+                                        </div>
+                                    </div>
+                                    {% for gender in genders %}
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="genders" value="{{ gender }}" class="gender-checkbox">
+                                        <span class="checkmark"></span>
+                                        <div>
+                                            <strong>{{ gender }}</strong>
+                                            <div class="text-muted small">{{ gender_counts.get(gender, 0) }} schools</div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Functional Status Filter -->
+                            <div class="config-section" data-aos="fade-up" data-aos-delay="600">
+                                <h6><i class="fas fa-toggle-on"></i>Functional Status</h6>
+                                <label class="form-label-elegant">
+                                    <i class="fas fa-power-off"></i>School Operational Status
+                                </label>
+                                <select name="functional_status" class="form-control-elegant form-select">
+                                    <option value="all">All Schools (Functional & Non-Functional)</option>
+                                    <option value="functional" selected>Functional Schools Only</option>
+                                    <option value="non_functional">Non-Functional Schools Only</option>
+                                </select>
+                            </div>
+
+                            <!-- School Level Filter -->
+                            <div class="config-section" data-aos="fade-up" data-aos-delay="800">
+                                <h6><i class="fas fa-graduation-cap"></i>School Level Selection</h6>
+                                <label class="form-label-elegant">
+                                    <i class="fas fa-layer-group"></i>Select School Levels to Analyze
+                                </label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="all_levels" name="levels" value="all" checked>
+                                        <span class="checkmark"></span>
+                                        <div>
+                                            <strong>All Levels</strong>
+                                            <div class="text-muted small">Include all school levels</div>
+                                        </div>
+                                    </div>
+                                    {% for level in levels %}
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" name="levels" value="{{ level }}" class="level-checkbox">
+                                        <span class="checkmark"></span>
+                                        <div>
+                                            <strong>{{ level }}</strong>
+                                            <div class="text-muted small">{{ level_counts.get(level, 0) }} schools</div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Minimum Enrollment -->
+                            <div class="config-section" data-aos="fade-up" data-aos-delay="900">
+                                <h6><i class="fas fa-users"></i>Minimum Enrollment Configuration</h6>
+                                <label class="form-label-elegant">
+                                    <i class="fas fa-user-graduate"></i>Minimum Student Enrollment for Analysis
+                                </label>
+                                <div class="range-container">
+                                    <input type="range" name="min_enrollment" id="enrollmentSlider" min="10" max="200" value="20" 
+                                           class="range-slider" oninput="updateEnrollmentDisplay(this.value)">
+                                    <div class="range-output" id="enrollmentOutput">
+                                        Minimum Enrollment: <strong>20 students</strong>
+                                    </div>
+                                </div>
+                                <div class="preset-buttons">
+                                    <button type="button" class="preset-btn" onclick="setEnrollment(10)">10</button>
+                                    <button type="button" class="preset-btn active" onclick="setEnrollment(20)">20</button>
+                                    <button type="button" class="preset-btn" onclick="setEnrollment(30)">30</button>
+                                    <button type="button" class="preset-btn" onclick="setEnrollment(50)">50</button>
+                                    <button type="button" class="preset-btn" onclick="setEnrollment(100)">100</button>
+                                </div>
+                                <div class="alert alert-info mt-2">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Schools with enrollment below this threshold will be excluded from analysis.
+                                </div>
+                            </div>
+
+                            <!-- Search Radius -->
+                            <div class="config-section" data-aos="fade-up" data-aos-delay="1000">
+                                <h6><i class="fas fa-circle-notch"></i>Search Radius Configuration</h6>
+                                <label class="form-label-elegant">
+                                    <i class="fas fa-ruler"></i>Distance for Upgrade Analysis (kilometers)
+                                </label>
+                                <div class="range-container">
+                                    <input type="range" name="radius" id="radiusSlider" min="1" max="50" value="10" 
+                                           class="range-slider" oninput="updateRadiusDisplay(this.value)">
+                                    <div class="range-output" id="radiusOutput">
+                                        Search Radius: <strong>10 km</strong>
+                                    </div>
+                                </div>
+                                <div class="preset-buttons">
+                                    <button type="button" class="preset-btn" onclick="setRadius(5)">5 km</button>
+                                    <button type="button" class="preset-btn active" onclick="setRadius(10)">10 km</button>
+                                    <button type="button" class="preset-btn" onclick="setRadius(15)">15 km</button>
+                                    <button type="button" class="preset-btn" onclick="setRadius(20)">20 km</button>
+                                    <button type="button" class="preset-btn" onclick="setRadius(30)">30 km</button>
+                                </div>
+                                <div class="analysis-preview" id="analysisPreview">
+                                    <h6><i class="fas fa-info-circle me-2"></i>Analysis Preview</h6>
+                                    <div class="preview-item">
+                                        <span>Schools to be analyzed:</span>
+                                        <strong id="previewSchools">Loading...</strong>
+                                    </div>
+                                    <div class="preview-item">
+                                        <span>Districts included:</span>
+                                        <strong id="previewDistricts">Loading...</strong>
+                                    </div>
+                                    <div class="preview-item">
+                                        <span>Search radius:</span>
+                                        <strong id="previewRadius">10 km</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="action-buttons" data-aos="fade-up" data-aos-delay="1200">
+                                <div class="d-flex gap-3 justify-content-center">
+                                    <button type="submit" class="btn btn-primary-elegant btn-elegant btn-lg" id="analyzeBtn">
+                                        <i class="fas fa-chart-line me-2"></i>
+                                        <span id="analyzeBtnText">Start Analysis</span>
+                                        <span id="analyzeBtnSpinner" class="spinner-border spinner-border-sm ms-2" style="display: none;"></span>
+                                    </button>
+                                    <a href="/" class="btn btn-secondary-elegant btn-elegant btn-lg">
+                                        <i class="fas fa-times me-2"></i>Cancel
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Summary Sidebar -->
+            <div class="col-lg-4">
+                <div class="data-summary" data-aos="fade-left" data-aos-delay="300">
+                    <h5><i class="fas fa-database me-2"></i>Dataset Summary</h5>
+                    <div class="summary-item">
+                        <span class="summary-label">Total Schools:</span>
+                        <span class="summary-value">{{ total_schools }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Districts:</span>
+                        <span class="summary-value">{{ districts|length }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Gender Types:</span>
+                        <span class="summary-value">{{ genders|length }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">School Levels:</span>
+                        <span class="summary-value">{{ levels|length }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Functional Schools:</span>
+                        <span class="summary-value">{{ functional_count }}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Data File:</span>
+                        <span class="summary-value">{{ filename }}</span>
+                    </div>
+                </div>
+
+                <!-- Analysis Tips -->
+                <div class="card-elegant mt-3" data-aos="fade-left" data-aos-delay="500">
+                    <div class="card-body-elegant">
+                        <h6 class="text-primary"><i class="fas fa-lightbulb me-2"></i>Analysis Tips</h6>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                <small>Smaller radius provides more precise recommendations</small>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                <small>Include functional schools for upgrade potential</small>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check text-success me-2"></i>
+                                <small>Filter by district for regional analysis</small>
+                            </li>
+                            <li class="mb-0">
+                                <i class="fas fa-check text-success me-2"></i>
+                                <small>Consider gender balance in recommendations</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <span>Performing analysis...</span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+        });
+
+        // Form elements
+        const form = document.getElementById('configForm');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const analyzeBtnText = document.getElementById('analyzeBtnText');
+        const analyzeBtnSpinner = document.getElementById('analyzeBtnSpinner');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Range slider functionality
+        function updateRadiusDisplay(value) {
+            document.getElementById('radiusOutput').innerHTML = `Search Radius: <strong>${value} km</strong>`;
+            document.getElementById('previewRadius').textContent = `${value} km`;
+            
+            // Update preset button states
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+        }
+
+        function updateEnrollmentDisplay(value) {
+            document.getElementById('enrollmentOutput').innerHTML = `Minimum Enrollment: <strong>${value} students</strong>`;
+            
+            // Update preset button states for enrollment
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+        }
+
+        function setRadius(value) {
+            document.getElementById('radiusSlider').value = value;
+            updateRadiusDisplay(value);
+            
+            // Update preset button states
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(value + ' km')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            updatePreview();
+        }
+
+        function setEnrollment(value) {
+            document.getElementById('enrollmentSlider').value = value;
+            updateEnrollmentDisplay(value);
+            
+            // Update preset button states for enrollment
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent == value) {
+                    btn.classList.add('active');
+                }
+            });
+
+            updatePreview();
+        }
+
+        // Checkbox handling
+        function toggleSelectAll(type) {
+            const allCheckbox = document.getElementById(`all_${type}s`);
+            const individualCheckboxes = document.querySelectorAll(`.${type}-checkbox`);
+            
+            allCheckbox.checked = !allCheckbox.checked;
+            
+            if (allCheckbox.checked) {
+                individualCheckboxes.forEach(cb => {
+                    cb.checked = false;
+                    cb.closest('.checkbox-item').classList.remove('selected');
+                });
+                allCheckbox.closest('.checkbox-item').classList.add('selected');
+            } else {
+                allCheckbox.closest('.checkbox-item').classList.remove('selected');
+            }
+            
+            updatePreview();
+        }
+
+        // Individual checkbox handling
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded - Initializing checkboxes');
+            
+            // Initialize checkbox states first
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                checkbox.closest('.checkbox-item').classList.add('selected');
+            });
+            
+            // Make checkbox items clickable
+            document.querySelectorAll('.checkbox-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Don't trigger if clicking directly on the checkbox or checkmark
+                    if (e.target.type === 'checkbox' || e.target.classList.contains('checkmark')) {
+                        return;
+                    }
+                    
+                    const checkbox = this.querySelector('input[type="checkbox"]');
+                    if (checkbox) {
+                        checkbox.checked = !checkbox.checked;
+                        // Trigger change event to update styles
+                        checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+                    }
+                });
+            });
+            
+            // Handle checkbox change events
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    console.log('Checkbox changed:', this.id || this.value, 'checked:', this.checked);
+                    
+                    const checkboxItem = this.closest('.checkbox-item');
+                    if (this.checked) {
+                        checkboxItem.classList.add('selected');
+                        
+                        // If individual checkbox is selected, uncheck "all" option
+                        if (this.classList.contains('district-checkbox')) {
+                            const allDistricts = document.getElementById('all_districts');
+                            if (allDistricts) {
+                                allDistricts.checked = false;
+                                allDistricts.closest('.checkbox-item').classList.remove('selected');
+                            }
+                        }
+                        if (this.classList.contains('gender-checkbox')) {
+                            const allGenders = document.getElementById('all_genders');
+                            if (allGenders) {
+                                allGenders.checked = false;
+                                allGenders.closest('.checkbox-item').classList.remove('selected');
+                            }
+                        }
+                        if (this.classList.contains('level-checkbox')) {
+                            const allLevels = document.getElementById('all_levels');
+                            if (allLevels) {
+                                allLevels.checked = false;
+                                allLevels.closest('.checkbox-item').classList.remove('selected');
+                            }
+                        }
+                    } else {
+                        checkboxItem.classList.remove('selected');
+                    }
+                    
+                    updatePreview();
+                });
+            });
+            
+            // Initialize preview
+            updatePreview();
+        });
+
+        // Update analysis preview
+        function updatePreview() {
+            const selectedDistricts = getSelectedValues('districts');
+            const selectedGenders = getSelectedValues('genders');
+            const selectedLevels = getSelectedValues('levels');
+            const radius = document.getElementById('radiusSlider').value;
+            
+            // Update preview display
+            document.getElementById('previewDistricts').textContent = 
+                selectedDistricts.includes('all') ? 'All Districts' : `${selectedDistricts.length} selected`;
+            document.getElementById('previewRadius').textContent = `${radius} km`;
+            
+            // Calculate estimated schools (simplified calculation)
+            let estimatedSchools = parseInt('{{ total_schools }}');
+            if (!selectedDistricts.includes('all')) {
+                const totalDistricts = parseInt('{{ districts|length }}');
+                estimatedSchools = Math.floor(estimatedSchools * (selectedDistricts.length / totalDistricts));
+            }
+            
+            document.getElementById('previewSchools').textContent = `≈ ${estimatedSchools.toLocaleString()}`;
+        }
+
+        function getSelectedValues(name) {
+            const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate selections
+            const districts = getSelectedValues('districts');
+            const genders = getSelectedValues('genders');
+            const levels = getSelectedValues('levels');
+            
+            if (districts.length === 0) {
+                alert('Please select at least one district or choose "All Districts".');
+                return;
+            }
+            
+            if (genders.length === 0) {
+                alert('Please select at least one gender type or choose "All Gender Types".');
+                return;
+            }
+            
+            if (levels.length === 0) {
+                alert('Please select at least one school level or choose "All Levels".');
+                return;
+            }
+            
+            // Show loading state
+            analyzeBtn.disabled = true;
+            analyzeBtnText.textContent = 'Analyzing...';
+            analyzeBtnSpinner.style.display = 'inline-block';
+            loadingSpinner.style.display = 'flex';
+            
+            // Submit form
+            this.submit();
+        });
+
+        // Initialize checkboxes state
+        document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+            checkbox.closest('.checkbox-item').classList.add('selected');
+        });
+
+        // Initialize preview
+        updatePreview();
+
+        // Smooth animations for interactions
+        document.querySelectorAll('.checkbox-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                if (!this.classList.contains('selected')) {
+                    this.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

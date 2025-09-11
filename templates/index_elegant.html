@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balochistan School Upgrade Analysis System | Government of Balochistan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #0891b2;
+            --accent-color: #dc2626;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --info-color: #0284c7;
+            --dark-color: #1f2937;
+            --light-bg: #f8fafc;
+            --white: #ffffff;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+            --gradient-success: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            --gradient-info: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+            
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-3xl: 2rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--gradient-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            color: var(--gray-800);
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="white" stop-opacity="0.1"/><stop offset="100%" stop-color="white" stop-opacity="0"/></radialGradient></defs><circle cx="100" cy="100" r="50" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;900,900;0,0" dur="20s" repeatCount="indefinite"/></circle><circle cx="800" cy="200" r="30" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;-700,700;0,0" dur="15s" repeatCount="indefinite"/></circle><circle cx="400" cy="800" r="40" fill="url(%23a)"><animateTransform attributeName="transform" type="translate" values="0,0;500,-500;0,0" dur="25s" repeatCount="indefinite"/></circle></svg>') center/cover;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Government Header */
+        .gov-header {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gov-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="2" height="2" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .gov-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .gov-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .gov-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .header-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header-text h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-text p {
+            font-size: 1.125rem;
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Main Container */
+        .main-container {
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        /* Hero Card */
+        .hero-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: var(--radius-3xl);
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hero-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 35px 70px -12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Card Header */
+        .card-header-elegant {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header-elegant::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: rotate 6s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .card-header-elegant h1 {
+            font-size: 2.75rem;
+            font-weight: 800;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header-elegant p {
+            font-size: 1.25rem;
+            margin: 1rem 0 0 0;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+
+        /* Card Body */
+        .card-body-elegant {
+            padding: 3rem;
+        }
+
+        /* Alerts */
+        .alert-elegant {
+            border: none;
+            border-radius: var(--radius-xl);
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid;
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .alert-elegant::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: inherit;
+            opacity: 0.3;
+        }
+
+        .alert-success-elegant {
+            background: linear-gradient(135deg, rgba(236, 253, 245, 0.9) 0%, rgba(240, 253, 244, 0.9) 100%);
+            border-left-color: var(--success-color);
+            color: #065f46;
+        }
+
+        .alert-danger-elegant {
+            background: linear-gradient(135deg, rgba(254, 242, 242, 0.9) 0%, rgba(254, 241, 241, 0.9) 100%);
+            border-left-color: var(--accent-color);
+            color: #991b1b;
+        }
+
+        .alert-warning-elegant {
+            background: linear-gradient(135deg, rgba(255, 251, 235, 0.9) 0%, rgba(254, 252, 232, 0.9) 100%);
+            border-left-color: var(--warning-color);
+            color: #92400e;
+        }
+
+        .alert-info-elegant {
+            background: linear-gradient(135deg, rgba(240, 249, 255, 0.9) 0%, rgba(245, 251, 255, 0.9) 100%);
+            border-left-color: var(--info-color);
+            color: #1e40af;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: linear-gradient(135deg, var(--gray-50) 0%, rgba(248, 250, 252, 0.8) 100%);
+            border: 3px dashed var(--primary-color);
+            border-radius: var(--radius-2xl);
+            padding: 4rem 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .upload-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .upload-section:hover::before {
+            left: 100%;
+        }
+
+        .upload-section:hover {
+            border-color: var(--secondary-color);
+            background: linear-gradient(135deg, rgba(241, 245, 249, 0.9) 0%, rgba(226, 232, 240, 0.9) 100%);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .upload-section.drag-over {
+            border-color: var(--success-color);
+            background: linear-gradient(135deg, rgba(236, 253, 245, 0.9) 0%, rgba(240, 253, 244, 0.9) 100%);
+            transform: scale(1.02);
+        }
+
+        .upload-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: block;
+            animation: bounce 2s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .upload-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .upload-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Buttons */
+        .btn-elegant {
+            font-weight: 600;
+            border-radius: var(--radius-xl);
+            padding: 1rem 2.5rem;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-elegant::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-elegant:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary-elegant {
+            background: var(--gradient-secondary);
+            color: white;
+        }
+
+        .btn-primary-elegant:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        .btn-outline-elegant {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline-elegant:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-success-elegant {
+            background: var(--gradient-success);
+            color: white;
+        }
+
+        .btn-success-elegant:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+            color: white;
+        }
+
+        /* Divider */
+        .divider-elegant {
+            display: flex;
+            align-items: center;
+            margin: 3rem 0;
+            color: var(--gray-500);
+            font-weight: 600;
+        }
+
+        .divider-elegant::before,
+        .divider-elegant::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, var(--gray-300) 20%, var(--gray-300) 80%, transparent 100%);
+        }
+
+        .divider-elegant span {
+            padding: 0 2rem;
+            background: white;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-2xl);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--gray-600);
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        /* File Info */
+        .file-info {
+            background: var(--gradient-info);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--radius-xl);
+            margin-top: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Validation Result */
+        .validation-result {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: var(--radius-xl);
+            display: none;
+            box-shadow: var(--shadow-md);
+        }
+
+        .validation-success {
+            background: var(--gradient-success);
+            color: white;
+        }
+
+        .validation-error {
+            background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%);
+            color: white;
+        }
+
+        /* Loading Overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+        }
+
+        .loading-content {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius-2xl);
+            text-align: center;
+            box-shadow: var(--shadow-2xl);
+            max-width: 400px;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--gray-200);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Required Columns Section */
+        .columns-section {
+            background: linear-gradient(135deg, var(--gray-50) 0%, rgba(248, 250, 252, 0.8) 100%);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid var(--gray-200);
+        }
+
+        .column-list {
+            max-height: 350px;
+            overflow-y: auto;
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .column-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .column-item:last-child {
+            border-bottom: none;
+        }
+
+        .column-item i {
+            color: var(--success-color);
+            margin-right: 0.75rem;
+        }
+
+        .column-item code {
+            background: var(--gray-100);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+        }
+
+        /* Instructions Section */
+        .instructions-section {
+            background: linear-gradient(135deg, rgba(240, 249, 255, 0.8) 0%, rgba(245, 251, 255, 0.8) 100%);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            margin-top: 2rem;
+            border: 1px solid rgba(2, 132, 199, 0.2);
+        }
+
+        .instruction-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(2, 132, 199, 0.1);
+            font-weight: 500;
+        }
+
+        .instruction-item:last-child {
+            border-bottom: none;
+        }
+
+        .instruction-item i {
+            color: var(--success-color);
+            margin-right: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .header-text h1 {
+                font-size: 2rem;
+            }
+            
+            .card-header-elegant h1 {
+                font-size: 2rem;
+            }
+            
+            .card-header-elegant p {
+                font-size: 1rem;
+            }
+            
+            .upload-section {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .card-body-elegant {
+                padding: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Government Header -->
+    <div class="gov-header" data-aos="fade-down">
+        <div class="container">
+            <div class="gov-badge">
+                <i class="fas fa-shield-alt me-2"></i>
+                Government of Balochistan
+            </div>
+            <div class="header-content">
+                <div class="header-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                <div class="header-text">
+                    <h1>Department of Education</h1>
+                    <p>School Infrastructure Development Division</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container main-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+                <div class="hero-card" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Card Header -->
+                    <div class="card-header-elegant">
+                        <h1>School Upgrade Analysis System</h1>
+                        <p>Advanced AI-Powered Infrastructure Assessment Platform</p>
+                    </div>
+                    
+                    <!-- Card Body -->
+                    <div class="card-body-elegant">
+                        <!-- Flash Messages -->
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert-elegant alert-{{ 'danger' if category == 'error' else category }}-elegant" data-aos="fade-in">
+                                        <i class="fas fa-{{ 'exclamation-triangle' if category == 'error' else 'info-circle' }} me-2"></i>
+                                        {{ message }}
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+
+                        <!-- File Upload Form -->
+                        <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+                            <div class="upload-section" id="uploadArea" data-aos="zoom-in" data-aos-delay="400">
+                                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                                <h3 class="upload-title">Upload School Data</h3>
+                                <p class="upload-subtitle">
+                                    Click here or drag and drop your CSV file to begin analysis
+                                </p>
+                                <input type="file" class="form-control" name="file" accept=".csv,.xlsx,.xls" required id="fileInput" style="display: none;">
+                                <button type="button" class="btn btn-primary-elegant btn-elegant me-3" onclick="document.getElementById('fileInput').click()">
+                                    <i class="fas fa-folder-open me-2"></i>Choose File
+                                </button>
+                                <div class="divider-elegant my-4">
+                                    <span>or</span>
+                                </div>
+                                <a href="/load-sample" class="btn btn-success-elegant btn-elegant">
+                                    <i class="fas fa-database me-2"></i>Load Sample Data
+                                </a>
+                            </div>
+
+                            <!-- File Information -->
+                            <div id="fileInfo" class="file-info" style="display: none;" data-aos="fade-up">
+                                <h6><i class="fas fa-file-csv me-2"></i>Selected File</h6>
+                                <p id="fileName" class="mb-2"></p>
+                                <p id="fileSize" class="mb-0"></p>
+                            </div>
+
+                            <!-- Validation Result -->
+                            <div id="validationResult" class="validation-result">
+                                <div id="validationContent"></div>
+                                <div class="loading-spinner text-center">
+                                    <div class="spinner"></div>
+                                    <p class="mb-0 fw-semibold">Validating file format...</p>
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="600">
+                                <button type="submit" class="btn btn-primary-elegant btn-elegant btn-lg" id="submitBtn" disabled>
+                                    <i class="fas fa-upload me-2"></i>
+                                    <span id="btnText">Upload & Validate</span>
+                                    <span id="btnSpinner" class="spinner-border spinner-border-sm ms-2" style="display: none;"></span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Features Grid -->
+                        <div class="features-grid" data-aos="fade-up" data-aos-delay="800">
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h4 class="feature-title">Smart Analysis</h4>
+                                <p class="feature-description">AI-powered assessment of school infrastructure needs with advanced filtering and recommendation algorithms.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </div>
+                                <h4 class="feature-title">Interactive Maps</h4>
+                                <p class="feature-description">Visualize school locations and upgrade requirements on high-resolution interactive maps with clustering.</p>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <h4 class="feature-title">Export Reports</h4>
+                                <p class="feature-description">Generate detailed reports and recommendations in multiple formats for government decision-making.</p>
+                            </div>
+                        </div>
+
+                        <!-- Required Columns Information -->
+                        <div class="columns-section" data-aos="fade-up" data-aos-delay="1000">
+                            <h5><i class="fas fa-list-check me-2"></i>Required CSV Columns</h5>
+                            <p class="text-muted mb-3">Your CSV file must contain the following columns for proper analysis:</p>
+                            <div class="column-list">
+                                {% for column in required_columns %}
+                                <div class="column-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <code>{{ column }}</code>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Instructions -->
+                        <div class="instructions-section" data-aos="fade-up" data-aos-delay="1200">
+                            <h5><i class="fas fa-info-circle me-2"></i>System Instructions</h5>
+                            <div class="instruction-item">
+                                <i class="fas fa-check"></i>
+                                Upload a CSV file with complete school data including GPS coordinates
+                            </div>
+                            <div class="instruction-item">
+                                <i class="fas fa-check"></i>
+                                System will automatically validate file format and required columns
+                            </div>
+                            <div class="instruction-item">
+                                <i class="fas fa-check"></i>
+                                Configure search radius and filters to analyze upgrade requirements
+                            </div>
+                            <div class="instruction-item">
+                                <i class="fas fa-check"></i>
+                                View comprehensive results on interactive maps and download reports
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h5 class="mb-2">Processing Upload</h5>
+            <p class="text-muted mb-0">Please wait while we validate your data...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 50
+        });
+
+        // Upload functionality
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const validationResult = document.getElementById('validationResult');
+        const validationContent = document.getElementById('validationContent');
+        const loadingSpinner = document.querySelector('.loading-spinner');
+        const submitBtn = document.getElementById('submitBtn');
+        const uploadForm = document.getElementById('uploadForm');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].name.toLowerCase().endsWith('.csv')) {
+                fileInput.files = files;
+                handleFileSelect(files[0]);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        function handleFileSelect(file) {
+            // Show file info with animation
+            fileName.textContent = file.name;
+            fileSize.textContent = `Size: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+            fileInfo.style.display = 'block';
+            fileInfo.setAttribute('data-aos', 'fade-up');
+            AOS.refresh();
+
+            // Validate file
+            validateFile(file);
+        }
+
+        function validateFile(file) {
+            validationResult.style.display = 'block';
+            loadingSpinner.style.display = 'block';
+            validationContent.style.display = 'none';
+            submitBtn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/api/validate_columns', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingSpinner.style.display = 'none';
+                validationContent.style.display = 'block';
+
+                if (data.valid) {
+                    validationResult.className = 'validation-result validation-success';
+                    validationContent.innerHTML = `
+                        <h6><i class="fas fa-check-circle me-2"></i>File Validation Successful</h6>
+                        <p>${data.message}</p>
+                        <p><strong>Columns found:</strong> ${data.file_columns.length}</p>
+                        ${data.extra_columns.length > 0 ? 
+                            `<p><small><strong>Extra columns:</strong> ${data.extra_columns.join(', ')}</small></p>` : 
+                            ''}
+                    `;
+                    submitBtn.disabled = false;
+                } else {
+                    validationResult.className = 'validation-result validation-error';
+                    validationContent.innerHTML = `
+                        <h6><i class="fas fa-exclamation-triangle me-2"></i>File Validation Failed</h6>
+                        <p>${data.message}</p>
+                        ${data.missing_columns ? 
+                            `<p><strong>Missing columns:</strong> ${data.missing_columns.join(', ')}</p>` : 
+                            ''}
+                        ${data.file_columns ? 
+                            `<p><strong>Found columns:</strong> ${data.file_columns.join(', ')}</p>` : 
+                            ''}
+                    `;
+                    submitBtn.disabled = true;
+                }
+            })
+            .catch(error => {
+                loadingSpinner.style.display = 'none';
+                validationContent.style.display = 'block';
+                validationResult.className = 'validation-result validation-error';
+                validationContent.innerHTML = `
+                    <h6><i class="fas fa-exclamation-triangle me-2"></i>Validation Error</h6>
+                    <p>Error validating file: ${error.message}</p>
+                `;
+                submitBtn.disabled = true;
+            });
+        }
+
+        // Form submission handling
+        uploadForm.addEventListener('submit', function(e) {
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            
+            submitBtn.disabled = true;
+            btnText.textContent = 'Processing...';
+            btnSpinner.style.display = 'inline-block';
+            loadingOverlay.style.display = 'flex';
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

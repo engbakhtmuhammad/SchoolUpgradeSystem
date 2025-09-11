@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balochistan School Upgrade Analysis System | Government of Balochistan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #0f766e;
+            --accent-color: #dc2626;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --light-bg: #f8fafc;
+            --dark-text: #1f2937;
+            --medium-text: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .gov-header {
+            background: linear-gradient(90deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gov-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .gov-header .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .gov-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .main-container {
+            padding: 2rem 0;
+            position: relative;
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .hero-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+        }
+
+        .card-header-modern {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header-modern::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
+            50% { transform: translateX(-50%) translateY(-50%) rotate(180deg); }
+        }
+
+        .card-header-modern h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-header-modern p {
+            font-size: 1.125rem;
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-body-modern {
+            padding: 2.5rem;
+        }
+
+        .alert-modern {
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+            border-left-color: var(--success-color);
+            color: #065f46;
+        }
+
+        .alert-danger {
+            background: linear-gradient(135deg, #fef2f2 0%, #fef1f1 100%);
+            border-left-color: var(--accent-color);
+            color: #991b1b;
+        }
+
+        .alert-warning {
+            background: linear-gradient(135deg, #fffbeb 0%, #fefce8 100%);
+            border-left-color: var(--warning-color);
+            color: #92400e;
+        }
+
+        .upload-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 2px dashed var(--primary-color);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .upload-section:hover {
+            border-color: var(--secondary-color);
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            transform: translateY(-2px);
+        }
+
+        .upload-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .btn-modern {
+            font-weight: 600;
+            border-radius: 12px;
+            padding: 0.75rem 2rem;
+            border: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary-modern {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        .btn-outline-modern {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-outline-modern:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-success-modern {
+            background: linear-gradient(135deg, var(--success-color) 0%, #10b981 100%);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-success-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 2rem 0;
+            color: var(--medium-text);
+            font-weight: 500;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, var(--border-color) 50%, transparent 100%);
+        }
+
+        .divider span {
+            padding: 0 1rem;
+            background: white;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(4px);
+        }
+
+        .loading-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .stats-bar {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .stats-item {
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stats-label {
+            font-size: 0.875rem;
+            color: var(--medium-text);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .card-header-modern h1 {
+                font-size: 1.75rem;
+            }
+            
+            .card-header-modern p {
+                font-size: 1rem;
+            }
+            
+            .upload-section {
+                padding: 2rem 1rem;
+            }
+            
+            .card-body-modern {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Government Header -->
+    <div class="gov-header">
+        <div class="container">
+            <div class="gov-badge">
+                <i class="fas fa-shield-alt me-2"></i>
+                Government of Balochistan
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="fas fa-university me-3" style="font-size: 2rem;"></i>
+                <div>
+                    <h3 class="mb-0">Department of Education</h3>
+                    <p class="mb-0 opacity-75">School Infrastructure Development Division</p>
+                </div>
+            </div>
+        </div>
+    </div>
+            cursor: pointer;
+        }
+        .upload-area:hover {
+            border-color: #45a049;
+            background-color: rgba(76, 175, 80, 0.05);
+        }
+        .upload-area.drag-over {
+            border-color: #45a049;
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        .icon-large {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+        .column-list {
+            max-height: 300px;
+            overflow-y: auto;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .column-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .column-item:last-child {
+            border-bottom: none;
+        }
+        .validation-result {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        .validation-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .validation-error {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .file-info {
+            background-color: #e7f3ff;
+            border: 1px solid #b8daff;
+            color: #004085;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .loading-spinner {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container main-container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="mb-0">
+                            <i class="fas fa-graduation-cap me-2"></i>
+                            School Upgrade Analysis System
+                        </h2>
+                        <p class="mb-0 mt-2">Upload your school data CSV file to analyze upgrade requirements</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <!-- Flash Messages -->
+                        {% with messages = get_flashed_messages(with_categories=true) %}
+                            {% if messages %}
+                                {% for category, message in messages %}
+                                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                                        <i class="fas fa-{{ 'exclamation-triangle' if category == 'error' else 'info-circle' }} me-2"></i>
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+
+                        <!-- File Upload Form -->
+                        <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+                            <div class="upload-area" id="uploadArea">
+                                <i class="fas fa-cloud-upload-alt icon-large"></i>
+                                <h4>Upload School Data CSV File</h4>
+                                <p class="text-muted mb-3">
+                                    Click here or drag and drop your CSV file
+                                </p>
+                                <input type="file" class="form-control" name="file" accept=".csv" required id="fileInput" style="display: none;">
+                                <button type="button" class="btn btn-outline-primary" onclick="document.getElementById('fileInput').click()">
+                                    <i class="fas fa-folder-open me-2"></i>Choose File
+                                </button>
+                                <div class="mt-3">
+                                    <span class="text-muted">Or</span>
+                                    <a href="/load-sample" class="btn btn-outline-success ms-2">
+                                        <i class="fas fa-database me-2"></i>Load Sample Data
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- File Information -->
+                            <div id="fileInfo" class="file-info" style="display: none;">
+                                <h6><i class="fas fa-file-csv me-2"></i>Selected File</h6>
+                                <p id="fileName" class="mb-2"></p>
+                                <p id="fileSize" class="mb-0 text-muted"></p>
+                            </div>
+
+                            <!-- Validation Result -->
+                            <div id="validationResult" class="validation-result">
+                                <div id="validationContent"></div>
+                                <div class="loading-spinner text-center">
+                                    <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                                    Validating file format...
+                                </div>
+                            </div>
+                            
+                            <div class="text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn" disabled>
+                                    <i class="fas fa-upload me-2"></i>
+                                    <span id="btnText">Upload & Validate</span>
+                                    <span id="btnSpinner" class="spinner-border spinner-border-sm ms-2" style="display: none;"></span>
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Required Columns Information -->
+                        <div class="row mt-5">
+                            <div class="col-md-12">
+                                <h5><i class="fas fa-list-check me-2"></i>Required CSV Columns</h5>
+                                <p class="text-muted">Your CSV file must contain the following columns:</p>
+                                <div class="column-list">
+                                    {% for column in required_columns %}
+                                    <div class="column-item">
+                                        <i class="fas fa-check-circle text-success me-2"></i>
+                                        <code>{{ column }}</code>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Instructions -->
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <h5><i class="fas fa-info-circle me-2"></i>Instructions</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item border-0 bg-transparent">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        Upload a CSV file with school data including coordinates
+                                    </li>
+                                    <li class="list-group-item border-0 bg-transparent">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        System will validate file format and required columns
+                                    </li>
+                                    <li class="list-group-item border-0 bg-transparent">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        Set search radius to analyze upgrade requirements
+                                    </li>
+                                    <li class="list-group-item border-0 bg-transparent">
+                                        <i class="fas fa-check text-success me-2"></i>
+                                        View interactive map and download recommendations
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileInfo = document.getElementById('fileInfo');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const validationResult = document.getElementById('validationResult');
+        const validationContent = document.getElementById('validationContent');
+        const loadingSpinner = document.querySelector('.loading-spinner');
+        const submitBtn = document.getElementById('submitBtn');
+        const uploadForm = document.getElementById('uploadForm');
+
+        // Drag and drop functionality
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].name.toLowerCase().endsWith('.csv')) {
+                fileInput.files = files;
+                handleFileSelect(files[0]);
+            }
+        });
+
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelect(e.target.files[0]);
+            }
+        });
+
+        function handleFileSelect(file) {
+            // Show file info
+            fileName.textContent = file.name;
+            fileSize.textContent = `Size: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
+            fileInfo.style.display = 'block';
+
+            // Validate file
+            validateFile(file);
+        }
+
+        function validateFile(file) {
+            validationResult.style.display = 'block';
+            loadingSpinner.style.display = 'block';
+            validationContent.style.display = 'none';
+            submitBtn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/api/validate_columns', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadingSpinner.style.display = 'none';
+                validationContent.style.display = 'block';
+
+                if (data.valid) {
+                    validationResult.className = 'validation-result validation-success';
+                    validationContent.innerHTML = `
+                        <h6><i class="fas fa-check-circle me-2"></i>File Validation Successful</h6>
+                        <p>${data.message}</p>
+                        <p><strong>Columns found:</strong> ${data.file_columns.length}</p>
+                        ${data.extra_columns.length > 0 ? 
+                            `<p><small><strong>Extra columns:</strong> ${data.extra_columns.join(', ')}</small></p>` : 
+                            ''}
+                    `;
+                    submitBtn.disabled = false;
+                } else {
+                    validationResult.className = 'validation-result validation-error';
+                    validationContent.innerHTML = `
+                        <h6><i class="fas fa-exclamation-triangle me-2"></i>File Validation Failed</h6>
+                        <p>${data.message}</p>
+                        ${data.missing_columns ? 
+                            `<p><strong>Missing columns:</strong> ${data.missing_columns.join(', ')}</p>` : 
+                            ''}
+                        ${data.file_columns ? 
+                            `<p><strong>Found columns:</strong> ${data.file_columns.join(', ')}</p>` : 
+                            ''}
+                    `;
+                    submitBtn.disabled = true;
+                }
+            })
+            .catch(error => {
+                loadingSpinner.style.display = 'none';
+                validationContent.style.display = 'block';
+                validationResult.className = 'validation-result validation-error';
+                validationContent.innerHTML = `
+                    <h6><i class="fas fa-exclamation-triangle me-2"></i>Validation Error</h6>
+                    <p>Error validating file: ${error.message}</p>
+                `;
+                submitBtn.disabled = true;
+            });
+        }
+
+        // Form submission handling
+        uploadForm.addEventListener('submit', function(e) {
+            const btnText = document.getElementById('btnText');
+            const btnSpinner = document.getElementById('btnSpinner');
+            
+            submitBtn.disabled = true;
+            btnText.textContent = 'Uploading...';
+            btnSpinner.style.display = 'inline-block';
+        });
+    </script>
+</body>
+</html>

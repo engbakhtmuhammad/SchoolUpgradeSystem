@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - School Upgrade System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .main-container {
+            padding-top: 20px;
+            padding-bottom: 30px;
+        }
+        .card {
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: none;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 20px;
+        }
+        .card-header {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            text-align: center;
+            padding: 20px;
+        }
+        .stats-card {
+            background: linear-gradient(45deg, #e3f2fd, #f3e5f5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .stats-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .btn-success {
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        .btn-secondary {
+            border-radius: 25px;
+            padding: 12px 30px;
+            font-weight: 600;
+        }
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .table-container {
+            max-height: 500px;
+            overflow-y: auto;
+            border-radius: 8px;
+        }
+        .table th {
+            background-color: #f8f9fa;
+            border-top: none;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .upgrade-badge {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+        }
+        .breakdown-item {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .action-buttons {
+            position: sticky;
+            bottom: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid main-container">
+        <!-- Header -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="mb-0">
+                            <i class="fas fa-chart-line me-2"></i>
+                            School Upgrade Analysis Results
+                        </h2>
+                        <p class="mb-0 mt-2">Analysis completed with {{ stats.radius_used }}km search radius</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis Details -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h6><i class="fas fa-info-circle me-2"></i>Analysis Configuration</h6>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <strong>Districts:</strong><br>
+                                <span class="text-muted">
+                                    {% if stats.districts_analyzed == "All" %}
+                                        All Districts
+                                    {% else %}
+                                        {{ stats.districts_analyzed | join(", ") }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="col-md-2">
+                                <strong>Gender Types:</strong><br>
+                                <span class="text-muted">
+                                    {% if stats.genders_analyzed == "All" %}
+                                        All Gender Types
+                                    {% else %}
+                                        {{ stats.genders_analyzed | join(", ") }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="col-md-3">
+                                <strong>Functional Status:</strong><br>
+                                <span class="text-muted">{{ stats.functional_status }}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <strong>School Levels:</strong><br>
+                                <span class="text-muted">
+                                    {% if stats.levels_analyzed == "All" %}
+                                        All Levels
+                                    {% else %}
+                                        {{ stats.levels_analyzed | join(", ") }}
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="col-md-2">
+                                <strong>Search Radius:</strong><br>
+                                <span class="text-muted">{{ stats.radius_used }} km</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Row -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">{{ stats.total_schools }}</div>
+                    <div class="stats-label">Total Schools Analyzed</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">{{ stats.upgrade_candidates }}</div>
+                    <div class="stats-label">Schools Need Upgrade</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">{{ stats.radius_used }}</div>
+                    <div class="stats-label">Search Radius (km)</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="stats-card">
+                    <div class="stats-number">{{ ((stats.upgrade_candidates / stats.total_schools) * 100)|round(1) }}%</div>
+                    <div class="stats-label">Upgrade Percentage</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Row -->
+        <div class="row">
+            <!-- Map Column -->
+            <div class="col-lg-8 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-map me-2"></i>Interactive School Upgrade Map
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="map-container">
+                            {% if map_html %}
+                                {{ map_html|safe }}
+                            {% else %}
+                                <div class="text-center p-5">
+                                    <i class="fas fa-map text-muted" style="font-size: 3rem;"></i>
+                                    <p class="text-muted mt-3">Map could not be generated</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Column -->
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-chart-pie me-2"></i>Upgrade Breakdown
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        {% for (current, recommended), count in stats.upgrade_breakdown.items() %}
+                        <div class="breakdown-item">
+                            <div>
+                                <strong>{{ current }} → {{ recommended }}</strong>
+                                <br><small class="text-muted">Upgrade Type</small>
+                            </div>
+                            <div>
+                                <span class="badge bg-primary upgrade-badge">{{ count }} schools</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                        <hr>
+                        <h6><i class="fas fa-map-marker-alt me-2"></i>District Distribution</h6>
+                        {% for district, count in stats.district_breakdown.items() %}
+                        <div class="breakdown-item">
+                            <div>
+                                <strong>{{ district }}</strong>
+                                <br><small class="text-muted">District</small>
+                            </div>
+                            <div>
+                                <span class="badge bg-success upgrade-badge">{{ count }} schools</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons text-center">
+                    <a href="{{ url_for('download_results', analysis_id=analysis_id) }}" 
+                       class="btn btn-success btn-lg mb-2 d-block">
+                        <i class="fas fa-download me-2"></i>Download Results CSV
+                    </a>
+                    <a href="{{ url_for('index') }}" class="btn btn-secondary me-2">
+                        <i class="fas fa-upload me-2"></i>New Analysis
+                    </a>
+                    <button class="btn btn-primary" onclick="window.print()">
+                        <i class="fas fa-print me-2"></i>Print Report
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Results Table -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-table me-2"></i>Top 20 Schools Recommended for Upgrade
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-container">
+                            <table class="table table-striped table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>School Name</th>
+                                        <th>BEMIS Code</th>
+                                        <th>District</th>
+                                        <th>Tehsil</th>
+                                        <th>Current Level</th>
+                                        <th>Recommended Level</th>
+                                        <th>Students</th>
+                                        <th>Building Condition</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for school in upgrade_candidates %}
+                                    <tr>
+                                        <td><strong>{{ school.SchoolName }}</strong></td>
+                                        <td>{{ school.BemisCode }}</td>
+                                        <td>{{ school.District }}</td>
+                                        <td>{{ school.Tehsil }}</td>
+                                        <td>
+                                            <span class="badge bg-info">{{ school.CurrentLevel }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-success">{{ school.RecommendedLevel }}</span>
+                                        </td>
+                                        <td>{{ school.TotalStudentProfileEntered }}</td>
+                                        <td>
+                                            <span class="badge bg-{{ 'success' if school.BuildingCondition == 'Good' else 'warning' if school.BuildingCondition == 'Average' else 'danger' }}">
+                                                {{ school.BuildingCondition }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <small>{{ school.UpgradeReason[:50] }}{% if school.UpgradeReason|length > 50 %}...{% endif %}</small>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        {% if upgrade_candidates|length == 20 %}
+                        <div class="card-footer text-center">
+                            <small class="text-muted">
+                                Showing top 20 results. Download CSV for complete data.
+                            </small>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Auto-scroll to map after page load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.map-container').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }, 1000);
+        });
+
+        // Add tooltips to badges
+        const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        tooltips.forEach(tooltip => {
+            new bootstrap.Tooltip(tooltip);
+        });
+    </script>
+</body>
+</html>
