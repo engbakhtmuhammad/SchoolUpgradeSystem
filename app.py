@@ -925,9 +925,21 @@ def validate_columns():
 def load_sample():
     """Load the existing balochistan census data for testing"""
     try:
-        # Try to load the existing data file
-        file_path = 'balochistan_census.csv'
-        if os.path.exists(file_path):
+        # Try to load the existing data file - check multiple locations
+        possible_paths = [
+            'balochistan_census.csv',
+            'data/balochistan_census.csv',
+            os.path.join(os.path.dirname(__file__), 'balochistan_census.csv'),
+            os.path.join(os.path.dirname(__file__), 'data', 'balochistan_census.csv')
+        ]
+        
+        file_path = None
+        for path in possible_paths:
+            if os.path.exists(path):
+                file_path = path
+                break
+                
+        if file_path and os.path.exists(file_path):
             success, message = analyzer.load_data(file_path)
             
             if success:
